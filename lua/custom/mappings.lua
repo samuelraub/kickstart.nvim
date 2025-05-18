@@ -1,7 +1,5 @@
 local map = vim.keymap.set
 
-map('n', '<leader>ee', '<cmd>echo "foobar"<cr>')
-
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
 map('n', '<Esc>', '<cmd>nohlsearch<CR>')
@@ -9,9 +7,7 @@ map('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Diagnostic keymaps
 map('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
--- Keybinds to make split navigation easier.
---  Use CTRL+<hjkl> to switch between windows
---
+-- Keybinds to make split and tab navigation easier.
 --  See `:help wincmd` for a list of all window commands
 map('n', '<C-left>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 map('n', '<C-right>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
@@ -21,10 +17,13 @@ map('n', '<C-up>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 map('n', '<S-left>', '<cmd>bprev<cr>', { desc = 'Move focus to the left' })
 map('n', '<S-right>', '<cmd>bnext<cr>', { desc = 'Move focus to the right' })
 
+-- Save current buffer
 map('n', '<leader>w', '<cmd>update<cr>', { desc = 'Save current buffer' })
 
+-- Quit Neovim
 map('n', '<leader>qq', '<cmd>qa<cr>', { desc = 'Quit' })
 
+-- MiniFiles
 map('n', '<leader>fm', function()
   require('mini.files').open(vim.api.nvim_buf_get_name(0))
 end, { desc = 'Open MiniFiles here' })
@@ -33,6 +32,7 @@ map('n', '<leader>fM', function()
   require('mini.files').open()
 end, { desc = 'Open MiniFiles in CWD' })
 
+-- Delete buffers and windows
 map('n', '<leader>bq', function()
   require('snacks').bufdelete()
 end, { desc = '[Q]uit current [B]uffer' })
@@ -43,8 +43,50 @@ end, { desc = '[Q]uit [O]ther [B]uffers' })
 
 map('n', '<leader>bqw', '<cmd>bd<cr>', { desc = '[Q]uit [B]uffer and [W]indow' })
 
+-- Lazygit
 map('n', '<leader>gg', function()
   require('snacks').lazygit()
 end, { desc = 'Open Lazygit' })
+
+---
+--SUBSTITUTE--
+---
+
+vim.keymap.set('n', '<leader>su', ':%s/<c-r><c-w>//gc<left><left><left>', { desc = 'Substitute' })
+vim.keymap.set('v', '<leader>su', function()
+  local esc = vim.api.nvim_replace_termcodes('<esc>', true, false, true)
+  vim.api.nvim_feedkeys(esc, 'x', false)
+
+  local _, ls, cs = unpack(vim.fn.getpos "'<") -- start of selection
+  local _, le, ce = unpack(vim.fn.getpos "'>") -- end of selection
+  local lines = vim.api.nvim_buf_get_lines(0, ls - 1, le, false)
+
+  local selection
+  if #lines == 1 then
+    selection = string.sub(lines[1], cs, ce)
+  else
+    selection = lines[1]:sub(cs) .. '\n' .. table.concat(lines, '\n', 2, #lines - 1) .. '\n' .. lines[#lines]:sub(1, ce)
+  end
+
+  selection = vim.fn.escape(selection, '/\\')
+
+  vim.api.nvim_feedkeys(':%s/' .. selection .. '//gc', 'n', false)
+
+  local move_cursor = vim.api.nvim_replace_termcodes('<left><left><left>', true, false, true)
+  vim.api.nvim_feedkeys(move_cursor, 'n', false)
+end, { desc = 'Search and replace with visual selection', silent = true })
+
+---
+--RELOAD BROWSER TAB--
+---
+
+vim.keymap.set('n', '<leader>rr', function()
+  os.execute [[
+    osascript -e 'tell application "Firefox" to activate'
+    sleep 0.2
+    osascript -e 'tell application "System Events" to keystroke "r" using command down'
+  ]]
+  print 'Reloaded Firefox tab'
+end, { noremap = true, silent = true })
 
 return {}
