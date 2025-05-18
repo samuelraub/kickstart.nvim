@@ -168,51 +168,7 @@ vim.o.confirm = true
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
-
--- Clear highlights on search when pressing <Esc> in normal mode
---  See `:help hlsearch`
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-
--- Diagnostic keymaps
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-
--- Keybinds to make split navigation easier.
---  Use CTRL+<hjkl> to switch between windows
---
---  See `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<C-left>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-right>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-down>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-up>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
-
-vim.keymap.set('n', '<S-left>', '<cmd>bprev<cr>', { desc = 'Move focus to the left' })
-vim.keymap.set('n', '<S-right>', '<cmd>bnext<cr>', { desc = 'Move focus to the right' })
-
-vim.keymap.set('n', '<leader>w', '<cmd>update<cr>', { desc = 'Save current buffer' })
-
-vim.keymap.set('n', '<leader>qq', '<cmd>qa<cr>', { desc = 'Quit' })
-
-vim.keymap.set('n', '<leader>fm', function()
-  require('mini.files').open(vim.api.nvim_buf_get_name(0))
-end, { desc = 'Open MiniFiles here' })
-
-vim.keymap.set('n', '<leader>fM', function()
-  require('mini.files').open()
-end, { desc = 'Open MiniFiles in CWD' })
-
-vim.keymap.set('n', '<leader>bq', function()
-  require('snacks').bufdelete()
-end, { desc = '[Q]uit current [B]uffer' })
-
-vim.keymap.set('n', '<leader>bqo', function()
-  require('snacks').bufdelete.other()
-end, { desc = '[Q]uit [O]ther [B]uffers' })
-
-vim.keymap.set('n', '<leader>bqw', '<cmd>bd<cr>', { desc = '[Q]uit [B]uffer and [W]indow' })
-
-vim.keymap.set('n', '<leader>gg', function()
-  require('snacks').lazygit()
-end, { desc = 'Open Lazygit' })
+--  Are placed in `./lua/custom/mappings.lua`
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -255,31 +211,6 @@ rtp:prepend(lazypath)
 --
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
-  -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
-  'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
-
-  -- NOTE: Plugins can also be added by using a table,
-  -- with the first argument being the link and the following
-  -- keys can be used to configure plugin behavior/loading/etc.
-  --
-  -- Use `opts = {}` to automatically pass options to a plugin's `setup()` function, forcing the plugin to be loaded.
-  --
-
-  -- Alternatively, use `config = function() ... end` for full control over the configuration.
-  -- If you prefer to call `setup` explicitly, use:
-  --    {
-  --        'lewis6991/gitsigns.nvim',
-  --        config = function()
-  --            require('gitsigns').setup({
-  --                -- Your gitsigns configuration here
-  --            })
-  --        end,
-  --    }
-  --
-  -- Here is a more advanced example where we pass configuration
-  -- options to `gitsigns.nvim`.
-  --
-  -- See `:help gitsigns` to understand what the configuration keys do
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
     opts = {
@@ -1006,6 +937,7 @@ require('lazy').setup({
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   { import = 'custom.plugins' },
+  require 'custom.mappings',
   --
   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
   -- Or use telescope!
