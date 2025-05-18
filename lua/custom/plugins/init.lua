@@ -41,4 +41,8 @@ return {
     'nmac427/guess-indent.nvim',
     opts = {},
   },
+  {
+    'MagicDuck/grug-far.nvim',
+    opts = {},
+  },
 }

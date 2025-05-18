@@ -89,4 +89,16 @@ vim.keymap.set('n', '<leader>rr', function()
   print 'Reloaded Firefox tab'
 end, { noremap = true, silent = true })
 
+---
+--SEARCH AND REPLACE--
+---
+
+vim.keymap.set('n', '<leader>srb', function()
+  require('grug-far').open { prefills = { paths = vim.fn.expand '%' } }
+end, { desc = '[S]earch and [R]eplace in buffer' })
+
+vim.keymap.set('n', '<leader>sra', function()
+  require('grug-far').open()
+end, { desc = '[S]earch and [R]eplace in CWD' })
+
 return {}
