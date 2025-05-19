@@ -45,4 +45,25 @@ return {
     'MagicDuck/grug-far.nvim',
     opts = {},
   },
+  {
+    'windwp/nvim-ts-autotag',
+    opts = {},
+  },
+  { 'MeanderingProgrammer/render-markdown.nvim', opts = {} },
+  {
+    'tadmccorkle/markdown.nvim',
+    ft = 'markdown', -- or 'event = "VeryLazy"'
+    opts = {
+      -- configuration here or empty for defaults
+    },
+  },
+  {
+    'renerocksai/telekasten.nvim',
+    dependencies = { 'nvim-telescope/telescope.nvim' },
+    config = function()
+      require('telekasten').setup {
+        home = vim.fn.expand '~/zettelkasten',
+      }
+    end,
+  },
 }
