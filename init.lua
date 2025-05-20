@@ -754,6 +754,7 @@ require('lazy').setup({
             config = function()
               require('luasnip.loaders.from_vscode').lazy_load()
               require('luasnip').filetype_extend('ruby', { 'rails' })
+              require('luasnip.loaders.from_lua').load { paths = { './lua/custom/snippets' } }
             end,
           },
         },
