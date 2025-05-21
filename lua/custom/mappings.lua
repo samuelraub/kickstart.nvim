@@ -20,6 +20,9 @@ map('n', '<S-right>', '<cmd>bnext<cr>', { desc = 'Move focus to the right' })
 -- Save current buffer
 map('n', '<leader>w', '<cmd>update<cr>', { desc = 'Save current buffer' })
 
+-- Quit current window
+map('n', '<leader>q', '<cmd>q<cr>', { desc = 'Quit current window' })
+
 -- Quit Neovim
 map('n', '<leader>qq', '<cmd>qa<cr>', { desc = 'Quit' })
 
@@ -127,5 +130,19 @@ vim.keymap.set('n', '<leader>ub', function()
     vim.o.background = 'dark'
   end
 end, { desc = 'Toggle [U]I [B]ackground' })
+
+---
+--TOGGLE AUTOFORMAT
+---
+
+vim.keymap.set('n', '<leader>uf', function()
+  if vim.g.disable_autoformat then
+    vim.g.disable_autoformat = false
+    vim.notify 'Autoformat enabled'
+  else
+    vim.g.disable_autoformat = true
+    vim.notify 'Autoformat disabled'
+  end
+end, { desc = 'Toggle Auto [F]ormat on save' })
 
 return {}
