@@ -116,4 +116,16 @@ vim.keymap.set('n', '<leader>zc', '<cmd>Telekasten show_calendar<CR>')
 vim.keymap.set('n', '<leader>zb', '<cmd>Telekasten show_backlinks<CR>')
 vim.keymap.set('n', '<leader>zI', '<cmd>Telekasten insert_img_link<CR>')
 
+---
+--UI RELATED
+---
+
+vim.keymap.set('n', '<leader>ub', function()
+  if vim.o.background == 'dark' then
+    vim.o.background = 'light'
+  else
+    vim.o.background = 'dark'
+  end
+end, { desc = 'Toggle [U]I [B]ackground' })
+
 return {}
