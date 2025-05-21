@@ -291,6 +291,7 @@ require('lazy').setup({
         { '<leader>f', group = '[F]iles' },
         { '<leader>g', group = '[G]it' },
         { '<leader>sr', group = '[S]earch and [R]eplace' },
+        { '<leader>u', group = '[U]I related' },
       },
     },
   },
