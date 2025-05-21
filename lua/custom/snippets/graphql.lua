@@ -1,5 +1,10 @@
 return {
-  s('mut', {
+  -- mutation CreateEntry($input: CreateEntryMutationInput!) {
+  --   createEntry(input: $input) {
+  --     |
+  --   }
+  -- }
+  s('mu', {
     t { 'mutation ' },
     i(1),
     t { '($input: ' },
@@ -16,10 +21,24 @@ return {
     i(0),
     t { '', '\t}', '}' },
   }),
-}
 
--- mutation CreateEntry($input: CreateEntryMutationInput!) {
---   createEntry(input: $input) {
---     |
---   }
--- }
+  -- query Entries {
+  --   entries {
+  --     |
+  --   }
+  -- }
+  s('qu', {
+    t { 'query ' },
+    i(1),
+    t { ' {' },
+    t { '', '\t' },
+    f(function(args)
+      local str = args[1][1]
+      return string.lower(string.sub(str, 1, 1)) .. string.sub(str, 2)
+    end, { 1 }),
+    t { ' {' },
+    t { '', '\t\t' },
+    i(0),
+    t { '', '\t}', '}' },
+  }),
+}
