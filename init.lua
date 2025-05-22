@@ -729,6 +729,9 @@ require('lazy').setup({
           }
         end
       end,
+      formatters = { stylua = {
+        prepend_args = { '--indent-type', 'Spaces', '--indent-width', '2' },
+      } },
       formatters_by_ft = {
         lua = { 'stylua' },
         -- Conform can also run multiple formatters sequentially
