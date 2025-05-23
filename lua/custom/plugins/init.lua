@@ -29,13 +29,13 @@ return {
       -- your configuration comes here
       -- or leave it empty to use the default settings
       -- refer to the configuration section below
-      bigfile = { enabled = true },
-      bufdelete = { enabled = true },
-      indent = { enabled = true },
-      lazygit = { enabled = true },
-      scratch = { enabled = true },
-      scroll = { enabled = true },
-      toggle = { enabled = true },
+      bigfile = {},
+      bufdelete = {},
+      indent = {},
+      lazygit = {},
+      scratch = {},
+      scroll = {},
+      toggle = {},
     },
     init = function()
       vim.api.nvim_create_autocmd('User', {
