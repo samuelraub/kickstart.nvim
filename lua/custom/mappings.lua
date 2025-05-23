@@ -145,4 +145,9 @@ vim.keymap.set('n', '<leader>uf', function()
   end
 end, { desc = 'Toggle Auto [F]ormat on save' })
 
-return {}
+--QUICKADD
+---
+vim.keymap.set('n', '<leader>at', '<cmd>Quickadd t<cr>', { desc = 'Quickadd [T]odo' })
+vim.keymap.set('n', '<leader>an', '<cmd>Quickadd n<cr>', { desc = 'Quickadd [N]odo' })
+
+return {} ---
