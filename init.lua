@@ -292,6 +292,7 @@ require('lazy').setup({
         { '<leader>g', group = '[G]it' },
         { '<leader>sr', group = '[S]earch and [R]eplace' },
         { '<leader>u', group = '[U]I related' },
+        { '<leader>a', group = 'Quick[Add]' },
       },
     },
   },
