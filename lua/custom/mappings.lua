@@ -145,9 +145,22 @@ vim.keymap.set('n', '<leader>uf', function()
   end
 end, { desc = 'Toggle Auto [F]ormat on save' })
 
+---
 --QUICKADD
 ---
+
 vim.keymap.set('n', '<leader>at', '<cmd>Quickadd t<cr>', { desc = 'Quickadd [T]odo' })
 vim.keymap.set('n', '<leader>an', '<cmd>Quickadd n<cr>', { desc = 'Quickadd [N]odo' })
+
+---
+--SCRATCH BUFFERS
+---
+
+vim.keymap.set('n', '<leader>.', function()
+  Snacks.scratch()
+end, { desc = 'Toggle scratch buffer' })
+vim.keymap.set('n', '<leader>..', function()
+  Snacks.scratch.select()
+end, { desc = 'Select scratch buffer' })
 
 return {} ---
