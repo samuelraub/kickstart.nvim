@@ -39,4 +39,4 @@ return {
 }
 
 -- pnpm add -g vscode-langservers-extracted yaml-language-server @vtsls/language-server @microsoft/compose-language-service dockerfile-language-server-nodejs @tailwindcss/language-server @biomejs/biome
--- brew install marksman
+-- brew install marksman prettierd
