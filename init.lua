@@ -293,6 +293,7 @@ require('lazy').setup({
         { '<leader>sr', group = '[S]earch and [R]eplace' },
         { '<leader>u', group = '[U]I related' },
         { '<leader>a', group = 'Quick[Add]' },
+        { 'gi', group = 'LSP: [I]mports' },
       },
     },
   },
@@ -710,7 +711,7 @@ require('lazy').setup({
       },
     },
     opts = {
-      notify_on_error = false,
+      notify_on_error = true,
       format_on_save = function(bufnr)
         -- Disable with a global variable
         if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
@@ -870,7 +871,19 @@ require('lazy').setup({
       --  - va)  - [V]isually select [A]round [)]paren
       --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
       --  - ci'  - [C]hange [I]nside [']quote
-      require('mini.ai').setup { n_lines = 500 }
+      require('mini.ai').setup {
+        n_lines = 500,
+        custom_textobjects = {
+          g = function()
+            local from = { line = 1, col = 1 }
+            local to = {
+              line = vim.fn.line '$',
+              col = math.max(vim.fn.getline('$'):len(), 1),
+            }
+            return { from = from, to = to }
+          end,
+        },
+      }
 
       -- Add/delete/replace surroundings (brackets, quotes, etc.)
       --
