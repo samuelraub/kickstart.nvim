@@ -62,13 +62,15 @@ return {
   },
   {
     'MagicDuck/grug-far.nvim',
+    lazy = true,
     opts = {},
   },
   {
     'windwp/nvim-ts-autotag',
+    lazy = true,
     opts = {},
   },
-  { 'MeanderingProgrammer/render-markdown.nvim', opts = {} },
+  { 'MeanderingProgrammer/render-markdown.nvim', lazy = true, opts = {} },
   {
     'tadmccorkle/markdown.nvim',
     ft = 'markdown', -- or 'event = "VeryLazy"'
@@ -90,5 +92,12 @@ return {
     opts = {
       basepath = vim.fn.expand '~/zettelkasten/',
     },
+  },
+  {
+    'nvzone/typr',
+    lazy = true,
+    dependencies = 'nvzone/volt',
+    opts = {},
+    cmd = { 'Typr', 'TyprStats' },
   },
 }
