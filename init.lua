@@ -538,9 +538,9 @@ require('lazy').setup({
           --  the definition of its *type*, not where it was *defined*.
           map('grt', require('telescope.builtin').lsp_type_definitions, '[G]oto [T]ype Definition')
 
-          map('gia', require('vtsls').commands.add_missing_imports, '[A]dd missing [I]mports')
+          map('gria', require('vtsls').commands.add_missing_imports, '[A]dd missing [I]mports')
 
-          map('gio', require('vtsls').commands.organize_imports, '[O]rganize [I]mports')
+          map('grio', require('vtsls').commands.organize_imports, '[O]rganize [I]mports')
 
           -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
           ---@param client vim.lsp.Client
@@ -737,7 +737,7 @@ require('lazy').setup({
           return nil
         else
           return {
-            timeout_ms = 500,
+            timeout_ms = 2000,
             lsp_format = 'fallback',
           }
         end
