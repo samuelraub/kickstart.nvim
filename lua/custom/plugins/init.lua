@@ -63,7 +63,9 @@ return {
   {
     'MagicDuck/grug-far.nvim',
     lazy = true,
-    opts = {},
+    opts = {
+      showCompactInputs = true,
+    },
   },
   {
     'windwp/nvim-ts-autotag',
@@ -94,10 +96,7 @@ return {
     },
   },
   {
-    'nvzone/typr',
-    lazy = true,
-    dependencies = 'nvzone/volt',
+    dir = '~/dev/trackit.nvim',
     opts = {},
-    cmd = { 'Typr', 'TyprStats' },
   },
 }
