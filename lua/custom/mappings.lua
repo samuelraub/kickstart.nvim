@@ -111,13 +111,12 @@ end, { desc = '[S]earch and [R]eplace in CWD' })
 -- Most used functions
 vim.keymap.set('n', '<leader>z', '<cmd>Telekasten panel<CR>')
 vim.keymap.set('n', '<leader>zf', '<cmd>Telekasten find_notes<CR>')
-vim.keymap.set('n', '<leader>zg', '<cmd>Telekasten search_notes<CR>')
+vim.keymap.set('n', '<leader>zs', '<cmd>Telekasten search_notes<CR>')
 vim.keymap.set('n', '<leader>zd', '<cmd>Telekasten goto_today<CR>')
 vim.keymap.set('n', '<leader>zz', '<cmd>Telekasten follow_link<CR>')
 vim.keymap.set('n', '<leader>zn', '<cmd>Telekasten new_note<CR>')
-vim.keymap.set('n', '<leader>zc', '<cmd>Telekasten show_calendar<CR>')
 vim.keymap.set('n', '<leader>zb', '<cmd>Telekasten show_backlinks<CR>')
-vim.keymap.set('n', '<leader>zI', '<cmd>Telekasten insert_img_link<CR>')
+vim.keymap.set('n', '<leader>zt', '<cmd>Telekasten toggle_todo<CR>')
 
 ---
 --UI RELATED
@@ -163,4 +162,13 @@ vim.keymap.set('n', '<leader>..', function()
   Snacks.scratch.select()
 end, { desc = 'Select scratch buffer' })
 
-return {} ---
+---
+--TRACK IT
+---
+
+vim.keymap.set('n', '<leader>oci', '<cmd>TStart<cr>', { desc = '[C]lock [I]n' })
+vim.keymap.set('n', '<leader>oco', '<cmd>TStop<cr>', { desc = '[C]lock [O]ut' })
+vim.keymap.set('n', '<leader>otd', 'yypf|Dx', { desc = '[T]odo [D]uplicate' })
+vim.keymap.set('n', '<leader>ott', '<cmd>TToggle<cr>', { desc = '[T]odo [T]oggle' })
+
+return {}
