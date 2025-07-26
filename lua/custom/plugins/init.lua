@@ -69,7 +69,6 @@ return {
   },
   {
     'windwp/nvim-ts-autotag',
-    lazy = true,
     opts = {},
   },
   { 'MeanderingProgrammer/render-markdown.nvim', lazy = true, opts = {} },
