@@ -369,20 +369,20 @@ require('lazy').setup({
         --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
         --   },
         -- },
-        pickers = {
-          find_files = {
-            find_command = {
-              'rg',
-              '--files',
-              '--hidden',
-              '--no-ignore-vcs',
-              '-g',
-              '!**/node_modules/*',
-              '-g',
-              '!**/.git/*',
-            },
-          },
-        },
+        -- pickers = {
+        -- find_files = {
+        --   find_command = {
+        --     'rg',
+        --     '--files',
+        --     '--hidden',
+        --     '--no-ignore-vcs',
+        --     '-g',
+        --     '!**/node_modules/*',
+        --     '-g',
+        --     '!**/.git/*',
+        --   },
+        -- },
+        -- },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
