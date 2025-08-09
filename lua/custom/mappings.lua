@@ -51,6 +51,9 @@ map('n', '<leader>gg', function()
   require('snacks').lazygit()
 end, { desc = 'Open Lazygit' })
 
+-- Don't jump to next match, so I can immediately substitute with `cgn`
+map('n', '*', '*N', { desc = 'Search word under cursor' })
+
 ---
 --SUBSTITUTE--
 ---
