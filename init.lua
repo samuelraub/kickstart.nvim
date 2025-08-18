@@ -437,6 +437,11 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sn', function()
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
       end, { desc = '[S]earch [N]eovim files' })
+
+      -- Change current windows directory
+      vim.keymap.set('n', '<leader>sc', function()
+        require('kickstart.plugins.telescope_cd').directories()
+      end, { desc = '[C]d somewhere in current window' })
     end,
   },
 
