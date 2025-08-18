@@ -79,6 +79,7 @@ return {
       -- configuration here or empty for defaults
     },
   },
+  { 'RRethy/nvim-treesitter-endwise' },
   {
     'renerocksai/telekasten.nvim',
     dependencies = { 'nvim-telescope/telescope.nvim' },
