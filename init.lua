@@ -784,6 +784,7 @@ require('lazy').setup({
         -- python = { "isort", "black" },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
+        astro = { 'prettierd', 'prettier' },
         css = { 'biome' },
         graphql = { 'biome' },
         javascript = { 'biome' },
