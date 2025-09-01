@@ -1,3 +1,5 @@
+vim.lsp.set_log_level 'off'
+
 vim.lsp.enable 'ruby_lsp'
 vim.lsp.config('ruby_lsp', {
   cmd = { 'mise', 'x', '--', 'ruby-lsp' },
