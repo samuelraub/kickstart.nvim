@@ -884,7 +884,7 @@ require('lazy').setup({
       },
 
       sources = {
-        default = { 'lsp', 'path', 'snippets', 'lazydev' },
+        default = { 'snippets', 'lsp', 'path', 'buffer', 'lazydev' },
         providers = {
           lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
         },
@@ -899,7 +899,28 @@ require('lazy').setup({
       -- the rust implementation via `'prefer_rust_with_warning'`
       --
       -- See :h blink-cmp-config-fuzzy for more information
-      fuzzy = { implementation = 'lua' },
+      fuzzy = {
+        sorts = {
+          function(a, b)
+            local source_priority = {
+              snippets = 5,
+              lsp = 4,
+              path = 3,
+              buffer = 2,
+              lazydev = 1,
+            }
+            local a_priority = source_priority[a.source_id]
+            local b_priority = source_priority[b.source_id]
+            if a_priority ~= b_priority then
+              return a_priority > b_priority
+            end
+          end,
+          -- defaults
+          'score',
+          'sort_text',
+        },
+        implementation = 'lua',
+      },
 
       -- Shows a signature help window while you type arguments for a function
       signature = { enabled = true },
@@ -922,8 +943,9 @@ require('lazy').setup({
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
-  { -- Collection of various small independent plugins/modules
-    'echasnovski/mini.nvim',
+  {
+    'nvim-mini/mini.nvim',
+    version = false,
     config = function()
       -- Better Around/Inside textobjects
       --
