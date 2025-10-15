@@ -192,4 +192,10 @@ vim.keymap.set('n', '<leader>oco', '<cmd>TStop<cr>', { desc = '[C]lock [O]ut' })
 vim.keymap.set('n', '<leader>otd', 'yypf|Dx', { desc = '[T]odo [D]uplicate' })
 vim.keymap.set('n', '<leader>ott', '<cmd>TToggle<cr>', { desc = '[T]odo [T]oggle' })
 
+---
+--GITSIGNS
+---
+
+vim.keymap.set('n', '<leader>gb', '<cmd>Gitsigns blame<cr>', { desc = '[G]it [Blame]' })
+
 return {}
