@@ -40,6 +40,8 @@ vim.lsp.enable 'biome'
 
 vim.lsp.enable 'marksman'
 
+vim.lsp.enable 'gopls'
+
 -- needed for some commands like `organize_imports`
 return {
   'yioneko/nvim-vtsls',
