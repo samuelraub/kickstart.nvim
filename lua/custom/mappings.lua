@@ -52,7 +52,25 @@ map('n', '<leader>gg', function()
 end, { desc = 'Open Lazygit' })
 
 -- Don't jump to next match, so I can immediately substitute with `cgn`
-map('n', '*', '*N', { desc = 'Search word under cursor' })
+map('n', '*', '*N', { desc = 'Search word under cursor without jumping' })
+map('x', '*', function()
+  -- Yank the visual selection
+  vim.cmd 'noautocmd normal! "vy'
+  local text = vim.fn.getreg 'v'
+
+  -- Escape special characters for literal search
+  text = vim.fn.escape(text, [[\/]])
+
+  -- Set the search register with very-nomagic mode for literal matching
+  vim.fn.setreg('/', '\\V' .. text:gsub('\n', '\\n'))
+
+  -- Enable search highlighting
+  vim.opt.hlsearch = true
+
+  -- Exit visual mode
+  vim.cmd 'normal! gv'
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Esc>', true, false, true), 'n', false)
+end, { desc = 'Search selection without jumping' })
 
 ---
 --SUBSTITUTE--
