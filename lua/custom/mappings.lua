@@ -41,7 +41,16 @@ map('n', '<leader>bq', function()
 end, { desc = '[Q]uit current [B]uffer' })
 
 map('n', '<leader>bqo', function()
-  require('snacks').bufdelete.other()
+  local visible_bufs = {}
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    visible_bufs[vim.api.nvim_win_get_buf(win)] = true
+  end
+
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if vim.api.nvim_buf_is_loaded(buf) and not visible_bufs[buf] then
+      require('mini.bufremove').delete(buf, false)
+    end
+  end
 end, { desc = '[Q]uit [O]ther [B]uffers' })
 
 map('n', '<leader>bqw', '<cmd>bd<cr>', { desc = '[Q]uit [B]uffer and [W]indow' })

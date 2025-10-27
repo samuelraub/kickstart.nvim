@@ -993,6 +993,8 @@ require('lazy').setup({
 
       require('mini.jump').setup()
 
+      require('mini.bufremove').setup()
+
       require('mini.operators').setup {
         replace = {
           prefix = 'rr',
