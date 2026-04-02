@@ -196,8 +196,8 @@ end, { desc = 'Select scratch buffer' })
 --TRACK IT
 ---
 
-vim.keymap.set('n', '<leader>oci', '<cmd>TStart<cr>', { desc = '[C]lock [I]n' })
-vim.keymap.set('n', '<leader>oco', '<cmd>TStop<cr>', { desc = '[C]lock [O]ut' })
+vim.keymap.set('n', '<leader>oci', '<cmd>TClockIn<cr>', { desc = '[C]lock [I]n' })
+vim.keymap.set('n', '<leader>oco', '<cmd>TClockOut<cr>', { desc = '[C]lock [O]ut' })
 vim.keymap.set('n', '<leader>otd', 'yypf|Dx', { desc = '[T]odo [D]uplicate' })
 vim.keymap.set('n', '<leader>ott', '<cmd>TToggle<cr>', { desc = '[T]odo [T]oggle' })
 
