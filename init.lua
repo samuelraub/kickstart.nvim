@@ -737,6 +737,9 @@ require('lazy').setup({
           end,
         },
       }
+
+      -- stylua is a formatter (via conform), not an LSP server
+      vim.lsp.enable('stylua', false)
     end,
   },
 
@@ -775,9 +778,6 @@ require('lazy').setup({
           }
         end
       end,
-      formatters = { stylua = {
-        prepend_args = { '--indent-type', 'Spaces', '--indent-width', '2' },
-      } },
       formatters_by_ft = {
         lua = { 'stylua' },
         -- Conform can also run multiple formatters sequentially
@@ -941,7 +941,12 @@ require('lazy').setup({
   },
 
   -- Highlight todo, notes, etc in comments
-  { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
+  {
+    'folke/todo-comments.nvim',
+    event = 'VimEnter',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    opts = { signs = false },
+  },
 
   {
     'nvim-mini/mini.nvim',
