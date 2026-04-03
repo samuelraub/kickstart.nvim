@@ -4,9 +4,6 @@ local map = vim.keymap.set
 --  See `:help hlsearch`
 map('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
--- Diagnostic keymaps
-map('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-
 -- Keybinds to make split and tab navigation easier.
 --  See `:help wincmd` for a list of all window commands
 map('n', '<C-left>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
