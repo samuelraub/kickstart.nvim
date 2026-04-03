@@ -212,17 +212,18 @@ require('lazy').setup({
 
   {
     'nvim-treesitter/nvim-treesitter',
-    branch = 'master',
+    branch = 'main',
     lazy = false,
     build = ':TSUpdate',
-    main = 'nvim-treesitter.configs',
-    opts = {
-      ensure_installed = {
+    config = function()
+      require('nvim-treesitter').install {
         'bash',
         'c',
         'diff',
         'dockerfile',
+        'go',
         'html',
+        'javascript',
         'json5',
         'lua',
         'luadoc',
@@ -230,16 +231,26 @@ require('lazy').setup({
         'markdown_inline',
         'query',
         'ruby',
+        'typescript',
         'vim',
         'vimdoc',
-      },
-      auto_install = true,
-      highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = { 'ruby' },
-      },
-      indent = { enable = true, disable = { 'ruby' } },
-    },
+      }
+
+      -- Build custom telekasten parser if not installed
+      local parser_dir = require('nvim-treesitter.config').get_install_dir('parser')
+      if not vim.uv.fs_stat(parser_dir .. '/telekasten.so') then
+        local src = vim.fn.expand '~/dev/tree-sitter-telekasten'
+        if vim.uv.fs_stat(src) then
+          vim.system({ 'tree-sitter', 'build', '--output', parser_dir .. '/telekasten.so' }, { cwd = src }):wait()
+        end
+      end
+
+      vim.api.nvim_create_autocmd('FileType', {
+        callback = function(ev)
+          pcall(vim.treesitter.start, ev.buf)
+        end,
+      })
+    end,
   },
 
   require 'kickstart.plugins.autopairs',
