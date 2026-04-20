@@ -38,7 +38,7 @@ vim.o.splitbelow = true
 
 -- Treesitter folding
 vim.o.foldmethod = 'expr'
-vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 vim.o.foldenable = false
 vim.o.foldlevel = 20
 
@@ -229,6 +229,7 @@ require('lazy').setup({
         'luadoc',
         'markdown',
         'markdown_inline',
+        'python',
         'query',
         'ruby',
         'typescript',
@@ -247,7 +248,16 @@ require('lazy').setup({
 
       vim.api.nvim_create_autocmd('FileType', {
         callback = function(ev)
-          pcall(vim.treesitter.start, ev.buf)
+          local ok = pcall(vim.treesitter.start, ev.buf)
+          if not ok then
+            return
+          end
+          local ft = vim.bo[ev.buf].filetype
+          if ft == 'ruby' then
+            vim.bo[ev.buf].syntax = 'ON'
+          else
+            vim.bo[ev.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+          end
         end,
       })
     end,
