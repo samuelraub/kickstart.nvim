@@ -235,10 +235,11 @@ require('lazy').setup({
         'typescript',
         'vim',
         'vimdoc',
+        'yaml',
       }
 
       -- Build custom telekasten parser if not installed
-      local parser_dir = require('nvim-treesitter.config').get_install_dir('parser')
+      local parser_dir = require('nvim-treesitter.config').get_install_dir 'parser'
       if not vim.uv.fs_stat(parser_dir .. '/telekasten.so') then
         local src = vim.fn.expand '~/dev/tree-sitter-telekasten'
         if vim.uv.fs_stat(src) then
