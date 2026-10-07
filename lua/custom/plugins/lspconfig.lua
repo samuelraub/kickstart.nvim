@@ -1,7 +1,5 @@
--- Native LSP servers (installed externally, not via Mason)
--- pnpm add -g vscode-langservers-extracted yaml-language-server @vtsls/language-server @microsoft/compose-language-service dockerfile-language-server-nodejs @tailwindcss/language-server @biomejs/biome
--- brew install marksman prettierd
--- gem install ruby-lsp
+-- Native LSP servers come from mise, not Mason: the global ones from
+-- ~/.config/mise/config.toml, ruby-lsp from each project's mise.toml.
 
 vim.lsp.log.set_level 'off'
 
