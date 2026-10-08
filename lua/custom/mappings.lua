@@ -32,6 +32,26 @@ map('n', '<leader>fM', function()
   require('mini.files').open()
 end, { desc = 'Open MiniFiles in CWD' })
 
+-- Yank file path to the system clipboard
+local function yank_path(modifier, with_line)
+  return function()
+    if vim.bo.buftype ~= '' or vim.api.nvim_buf_get_name(0) == '' then
+      vim.notify('Buffer has no file path', vim.log.levels.WARN)
+      return
+    end
+    local path = vim.fn.expand(modifier)
+    if with_line then
+      path = path .. ':' .. vim.fn.line '.'
+    end
+    vim.fn.setreg('+', path)
+    vim.notify('Copied ' .. path)
+  end
+end
+
+map('n', '<leader>fy', yank_path '%:.', { desc = '[F]ile [Y]ank relative path' })
+map('n', '<leader>fY', yank_path '%:p', { desc = '[F]ile [Y]ank absolute path' })
+map('n', '<leader>fl', yank_path('%:.', true), { desc = '[F]ile yank relative path with [L]ine' })
+
 -- Delete buffers and windows
 map('n', '<leader>bq', function()
   require('snacks').bufdelete()
