@@ -12,7 +12,7 @@ This is a Neovim configuration based on [kickstart.nvim](https://github.com/nvim
 - **`lua/custom/`** -- User customizations that won't conflict with upstream kickstart:
   - `mappings.lua` -- All custom keymaps (returned as an empty table to satisfy lazy.nvim import)
   - `plugins/lspconfig.lua` -- Native `vim.lsp.enable`/`vim.lsp.config` setup for non-Mason LSP servers (ruby_lsp, vtsls, jsonls, yamlls, dockerls, tailwindcss, biome, marksman, gopls), plus the nvim-lspconfig/Mason spec, LSP keymaps and diagnostics
-  - `plugins/` -- Further plugin specs: `init.lua` (tmux-navigator, snacks.nvim, grug-far, telekasten, local dev plugins), `completion.lua`, `formatting.lua`, `telescope.lua`
+  - `plugins/` -- Further plugin specs: `init.lua` (tmux-navigator, snacks.nvim, grug-far, telekasten, local dev plugins), `completion.lua`, `diffview.lua` (branch review against the resolved base: `<leader>gd`, `<leader>gD` including the working tree, `<leader>gw` working tree only), `formatting.lua`, `telescope.lua`
   - `snippets/` -- Custom LuaSnip snippets (Lua loader format)
 - **`lua/kickstart/plugins/`** -- Optional kickstart modules. Only `autopairs` is currently enabled in init.lua.
 - **`after/ftplugin/`** -- Filetype-specific settings (telekasten)
