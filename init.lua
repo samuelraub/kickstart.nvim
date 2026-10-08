@@ -117,24 +117,10 @@ require('lazy').setup({
         end, 'git [r]eset hunk')
         map('n', '<leader>hs', gitsigns.stage_hunk, 'git [s]tage hunk')
         map('n', '<leader>hr', gitsigns.reset_hunk, 'git [r]eset hunk')
-        map('n', '<leader>hS', gitsigns.stage_buffer, 'git [S]tage buffer')
-        map('n', '<leader>hR', gitsigns.reset_buffer, 'git [R]eset buffer')
         map('n', '<leader>hp', gitsigns.preview_hunk, 'git [p]review hunk')
-        map('n', '<leader>hi', gitsigns.preview_hunk_inline, 'git preview hunk [i]nline')
         map('n', '<leader>hb', function()
           gitsigns.blame_line { full = true }
         end, 'git [b]lame line')
-        map('n', '<leader>hd', gitsigns.diffthis, 'git [d]iff against index')
-        map('n', '<leader>hD', function()
-          gitsigns.diffthis '~'
-        end, 'git [D]iff against last commit')
-        map('n', '<leader>hQ', function()
-          gitsigns.setqflist 'all'
-        end, 'git hunk [Q]uickfix list (all files in repo)')
-        map('n', '<leader>hq', gitsigns.setqflist, 'git hunk [q]uickfix list (this file)')
-        map('n', '<leader>tb', gitsigns.toggle_current_line_blame, '[T]oggle git show [b]lame line')
-        map('n', '<leader>tw', gitsigns.toggle_word_diff, '[T]oggle git intra-line [w]ord diff')
-        map({ 'o', 'x' }, 'ih', gitsigns.select_hunk, 'text object [i]nside [h]unk')
       end,
     },
   },
