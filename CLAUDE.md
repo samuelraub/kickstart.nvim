@@ -16,7 +16,7 @@ This is a Neovim configuration based on [kickstart.nvim](https://github.com/nvim
   - `snippets/` -- Custom LuaSnip snippets (Lua loader format)
 - **`lua/kickstart/plugins/`** -- Optional kickstart modules. Only `autopairs` is currently enabled in init.lua.
 - **`after/ftplugin/`** -- Filetype-specific settings (telekasten)
-- **`telekasten` parser** -- Custom Tree-sitter grammar at `~/dev/tree-sitter-telekasten`, registered with nvim-treesitter as a local `path` parser in `init.lua`; its queries live in the grammar repo. After `tree-sitter generate`, `:TSUpdate telekasten` recompiles the parser and re-links the queries (`:TSInstall` is a no-op once installed)
+- **`telekasten` parser** -- Custom Tree-sitter grammar at `~/dev/tree-sitter-telekasten`, registered with nvim-treesitter as a local `path` parser in `init.lua`; its queries live in the grammar repo. After `tree-sitter generate`, `:TSUpdate telekasten` recompiles the parser and re-links the queries (`:TSInstall` is a no-op once installed). If the `site/queries/telekasten` link is missing, `:TSUpdate` reports up to date; repair with `:TSInstall! telekasten`
 
 ## Key Conventions
 
