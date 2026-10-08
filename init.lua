@@ -216,7 +216,7 @@ require('lazy').setup({
     lazy = false,
     build = ':TSUpdate',
     config = function()
-      require('nvim-treesitter').install {
+      local languages = {
         'bash',
         'c',
         'diff',
@@ -236,16 +236,25 @@ require('lazy').setup({
         'vim',
         'vimdoc',
         'yaml',
+        'toml',
       }
 
-      -- Build custom telekasten parser if not installed
-      local parser_dir = require('nvim-treesitter.config').get_install_dir 'parser'
-      if not vim.uv.fs_stat(parser_dir .. '/telekasten.so') then
-        local src = vim.fn.expand '~/dev/tree-sitter-telekasten'
-        if vim.uv.fs_stat(src) then
-          vim.system({ 'tree-sitter', 'build', '--output', parser_dir .. '/telekasten.so' }, { cwd = src }):wait()
-        end
+      -- Local grammar: `:TSUpdate telekasten` recompiles src/parser.c and links
+      -- the queries; run `tree-sitter generate` first after a grammar.js change
+      local telekasten = '~/dev/tree-sitter-telekasten'
+      if vim.uv.fs_stat(vim.fs.normalize(telekasten)) then
+        vim.api.nvim_create_autocmd('User', {
+          pattern = 'TSUpdate',
+          callback = function()
+            require('nvim-treesitter.parsers').telekasten = {
+              install_info = { path = telekasten, queries = 'queries' },
+            }
+          end,
+        })
+        table.insert(languages, 'telekasten')
       end
+
+      require('nvim-treesitter').install(languages)
 
       vim.api.nvim_create_autocmd('FileType', {
         callback = function(ev)
