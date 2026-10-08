@@ -302,19 +302,35 @@ require('lazy').setup({
         table.insert(languages, 'telekasten')
       end
 
-      require('nvim-treesitter').install(languages)
+      local ts = require 'nvim-treesitter'
+      ts.install(languages)
 
+      local function attach(buf, lang)
+        if not vim.api.nvim_buf_is_valid(buf) or not vim.treesitter.language.add(lang) then
+          return
+        end
+        vim.treesitter.start(buf, lang)
+        if lang == 'ruby' then
+          vim.bo[buf].syntax = 'ON'
+        elseif vim.treesitter.query.get(lang, 'indents') then
+          vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end
+      end
+
+      local available = ts.get_available()
       vim.api.nvim_create_autocmd('FileType', {
         callback = function(ev)
-          local ok = pcall(vim.treesitter.start, ev.buf)
-          if not ok then
+          local lang = vim.treesitter.language.get_lang(ev.match)
+          if not lang then
             return
           end
-          local ft = vim.bo[ev.buf].filetype
-          if ft == 'ruby' then
-            vim.bo[ev.buf].syntax = 'ON'
+          -- Install missing parsers on first use
+          if vim.tbl_contains(available, lang) and not vim.tbl_contains(ts.get_installed 'parsers', lang) then
+            ts.install(lang):await(function()
+              attach(ev.buf, lang)
+            end)
           else
-            vim.bo[ev.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+            attach(ev.buf, lang)
           end
         end,
       })
