@@ -141,8 +141,6 @@ return {
         },
       }
 
-      local capabilities = require('blink.cmp').get_lsp_capabilities()
-
       local servers = {
         lua_ls = {
           settings = {
@@ -162,20 +160,13 @@ return {
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
-      require('mason-lspconfig').setup {
-        ensure_installed = {},
-        automatic_installation = false,
-        handlers = {
-          function(server_name)
-            local server = servers[server_name] or {}
-            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            require('lspconfig')[server_name].setup(server)
-          end,
-        },
-      }
+      -- Only enable the servers above; other Mason packages (stylua) are tools
+      require('mason-lspconfig').setup { automatic_enable = false }
 
-      -- stylua is a formatter (via conform), not an LSP server
-      vim.lsp.enable('stylua', false)
+      for name, server in pairs(servers) do
+        vim.lsp.config(name, server)
+        vim.lsp.enable(name)
+      end
     end,
   },
 }

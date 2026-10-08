@@ -8,11 +8,11 @@ This is a Neovim configuration based on [kickstart.nvim](https://github.com/nvim
 
 ## Architecture
 
-- **`init.lua`** -- Main entry point. Contains vim options, autocommands, and the full `lazy.nvim` plugin spec (inline, not split into separate files). Core plugins (telescope, lspconfig, conform, blink.cmp, treesitter, mini.nvim) are configured here.
+- **`init.lua`** -- Main entry point. Contains vim options, autocommands, the `lazy.nvim` bootstrap and the inline specs for gitsigns, which-key, the colorscheme, mini.nvim and treesitter. Everything else is imported from `lua/custom/plugins/`.
 - **`lua/custom/`** -- User customizations that won't conflict with upstream kickstart:
   - `mappings.lua` -- All custom keymaps (returned as an empty table to satisfy lazy.nvim import)
-  - `lsp.lua` -- Native `vim.lsp.enable`/`vim.lsp.config` setup for non-Mason LSP servers (ruby_lsp, vtsls, jsonls, yamlls, dockerls, tailwindcss, biome, marksman, gopls). Also returns the `nvim-vtsls` plugin spec.
-  - `plugins/init.lua` -- Additional plugin specs (tmux-navigator, snacks.nvim, grug-far, telekasten, local dev plugins)
+  - `plugins/lspconfig.lua` -- Native `vim.lsp.enable`/`vim.lsp.config` setup for non-Mason LSP servers (ruby_lsp, vtsls, jsonls, yamlls, dockerls, tailwindcss, biome, marksman, gopls), plus the nvim-lspconfig/Mason spec, LSP keymaps and diagnostics
+  - `plugins/` -- Further plugin specs: `init.lua` (tmux-navigator, snacks.nvim, grug-far, telekasten, local dev plugins), `completion.lua`, `formatting.lua`, `telescope.lua`
   - `snippets/` -- Custom LuaSnip snippets (Lua loader format)
 - **`lua/kickstart/plugins/`** -- Optional kickstart modules. Only `autopairs` is currently enabled in init.lua.
 - **`after/ftplugin/`** -- Filetype-specific settings (telekasten)
@@ -21,7 +21,7 @@ This is a Neovim configuration based on [kickstart.nvim](https://github.com/nvim
 ## Key Conventions
 
 - **Formatting**: stylua for Lua (2-space indent, spaces not tabs). JS/TS use biome; markdown/yaml/html use prettierd/prettier. Format-on-save is enabled via conform.nvim (toggle with `<leader>uf`).
-- **LSP strategy**: Mason manages lua_ls and installer tools. Other LSP servers are configured natively in `lua/custom/lsp.lua` and expected to be installed externally (see comment at bottom of that file for install commands).
+- **LSP strategy**: Mason manages lua_ls and installer tools. Other LSP servers are configured natively at the top of `lua/custom/plugins/lspconfig.lua` and come from mise, not Mason (see the comment at the top of that file).
 - **Leader key**: Space. Keymaps use `[D]escription` bracket notation for which-key display.
 - **Local plugins**: `quickadd.nvim` and `trackit.nvim` are loaded from `~/dev/` via `dir` field.
 - **Colorscheme**: rose-pine
