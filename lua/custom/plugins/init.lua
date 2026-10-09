@@ -88,12 +88,6 @@ return {
     },
   },
   {
-    dir = '~/dev/quickadd.nvim',
-    opts = {
-      basepath = vim.fn.expand '~/zettelkasten/',
-    },
-  },
-  {
     dir = '~/dev/trackit.nvim',
     opts = {},
   },

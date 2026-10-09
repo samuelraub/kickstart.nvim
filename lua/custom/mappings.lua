@@ -159,7 +159,7 @@ end, { desc = '[S]earch and [R]eplace in CWD' })
 vim.keymap.set('n', '<leader>z', '<cmd>Telekasten panel<CR>')
 vim.keymap.set('n', '<leader>zf', '<cmd>Telekasten find_notes<CR>')
 vim.keymap.set('n', '<leader>zs', '<cmd>Telekasten search_notes<CR>')
-vim.keymap.set('n', '<leader>zd', '<cmd>Telekasten goto_today<CR>')
+vim.keymap.set('n', '<leader>zd', '<cmd>TToday<CR>')
 vim.keymap.set('n', '<leader>zz', '<cmd>Telekasten follow_link<CR>')
 vim.keymap.set('n', '<leader>zn', '<cmd>Telekasten new_note<CR>')
 vim.keymap.set('n', '<leader>zb', '<cmd>Telekasten show_backlinks<CR>')
@@ -192,13 +192,6 @@ vim.keymap.set('n', '<leader>uf', function()
 end, { desc = 'Toggle Auto [F]ormat on save' })
 
 ---
---QUICKADD
----
-
-vim.keymap.set('n', '<leader>at', '<cmd>Quickadd t<cr>', { desc = 'Quickadd [T]odo' })
-vim.keymap.set('n', '<leader>an', '<cmd>Quickadd n<cr>', { desc = 'Quickadd [N]odo' })
-
----
 --SCRATCH BUFFERS
 ---
 
@@ -213,9 +206,11 @@ end, { desc = 'Select scratch buffer' })
 --TRACK IT
 ---
 
-vim.keymap.set('n', '<leader>oci', '<cmd>TClockIn<cr>', { desc = '[C]lock [I]n' })
+vim.keymap.set('n', '<leader>at', '<cmd>TTodo<cr>', { desc = '[A]dd [T]odo' })
+vim.keymap.set('n', '<leader>an', '<cmd>TNote<cr>', { desc = '[A]dd [N]ote' })
+vim.keymap.set('n', '<leader>oci', '<cmd>TClock<cr>', { desc = '[C]lock [I]n' })
 vim.keymap.set('n', '<leader>oco', '<cmd>TClockOut<cr>', { desc = '[C]lock [O]ut' })
-vim.keymap.set('n', '<leader>otd', 'yypf|Dx', { desc = '[T]odo [D]uplicate' })
+vim.keymap.set('n', '<leader>ocs', '<cmd>TSync<cr>', { desc = '[C]lock [S]ync to Redmine' })
 vim.keymap.set('n', '<leader>ott', '<cmd>TToggle<cr>', { desc = '[T]odo [T]oggle' })
 
 ---
