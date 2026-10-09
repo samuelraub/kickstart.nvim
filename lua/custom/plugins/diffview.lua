@@ -60,6 +60,11 @@ local function review_branch(with_worktree)
         return
       end
       vim.notify('Reviewing against ' .. base .. ', including uncommitted changes')
+      -- Diffview lists untracked files only for index vs. working tree
+      local untracked = git('ls-files', '--others', '--exclude-standard', '--full-name', ':/')
+      if untracked and untracked ~= '' then
+        vim.notify('Untracked files are not shown:\n' .. untracked, vim.log.levels.WARN)
+      end
       vim.cmd.DiffviewOpen(merge_base)
     end)
   end
