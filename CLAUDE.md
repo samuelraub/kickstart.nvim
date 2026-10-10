@@ -6,6 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a Neovim configuration based on [kickstart.nvim](https://github.com/nvim-kickstart/kickstart.nvim). It uses **lazy.nvim** as the plugin manager and is written entirely in Lua.
 
+Developed against Neovim 0.12.5 (Homebrew). Update this line when upgrading.
+
 ## Architecture
 
 - **`init.lua`** -- Main entry point. Contains vim options, autocommands, the `lazy.nvim` bootstrap and the inline specs for gitsigns, which-key, the colorscheme, mini.nvim and treesitter. Everything else is imported from `lua/custom/plugins/`.
