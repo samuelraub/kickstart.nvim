@@ -81,13 +81,6 @@ return {
   },
   { 'RRethy/nvim-treesitter-endwise' },
   {
-    'renerocksai/telekasten.nvim',
-    dependencies = { 'nvim-telescope/telescope.nvim' },
-    opts = {
-      home = vim.fn.expand '~/zettelkasten',
-    },
-  },
-  {
     dir = '~/dev/trackit.nvim',
     opts = {},
   },

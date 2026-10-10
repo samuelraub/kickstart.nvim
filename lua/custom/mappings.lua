@@ -152,18 +152,13 @@ vim.keymap.set('n', '<leader>sra', function()
 end, { desc = '[S]earch and [R]eplace in CWD' })
 
 ---
---TELEKASTEN--
+--ZETTELKASTEN--
 ---
 
--- Most used functions
-vim.keymap.set('n', '<leader>z', '<cmd>Telekasten panel<CR>')
-vim.keymap.set('n', '<leader>zf', '<cmd>Telekasten find_notes<CR>')
-vim.keymap.set('n', '<leader>zs', '<cmd>Telekasten search_notes<CR>')
-vim.keymap.set('n', '<leader>zd', '<cmd>TToday<CR>')
-vim.keymap.set('n', '<leader>zz', '<cmd>Telekasten follow_link<CR>')
-vim.keymap.set('n', '<leader>zn', '<cmd>Telekasten new_note<CR>')
-vim.keymap.set('n', '<leader>zb', '<cmd>Telekasten show_backlinks<CR>')
-vim.keymap.set('n', '<leader>zt', '<cmd>Telekasten toggle_todo<CR>')
+vim.keymap.set('n', '<leader>zf', '<cmd>TFind<CR>', { desc = '[Z]ettelkasten [F]ind note' })
+vim.keymap.set('n', '<leader>zs', '<cmd>TSearch<CR>', { desc = '[Z]ettelkasten [S]earch notes' })
+vim.keymap.set('n', '<leader>zd', '<cmd>TToday<CR>', { desc = '[Z]ettelkasten [D]aily note' })
+vim.keymap.set('n', '<leader>zn', '<cmd>TNew<CR>', { desc = '[Z]ettelkasten [N]ew note' })
 
 ---
 --UI RELATED
