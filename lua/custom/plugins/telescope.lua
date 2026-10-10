@@ -12,10 +12,7 @@ return {
     },
     { 'nvim-telescope/telescope-ui-select.nvim' },
     { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
-    {
-      'nvim-telescope/telescope-live-grep-args.nvim',
-      version = '^1.0.0',
-    },
+    { 'nvim-telescope/telescope-live-grep-args.nvim' },
   },
   config = function()
     local select_one_or_multi = function(prompt_bufnr)

@@ -7,6 +7,11 @@ vim.g.maplocalleader = ' '
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
+-- No remote plugins in use; skip the host lookups
+for _, provider in ipairs { 'node', 'perl', 'python3', 'ruby' } do
+  vim.g['loaded_' .. provider .. '_provider'] = 0
+end
+
 -- [[ Setting options ]]
 -- See `:help vim.o`
 
@@ -265,6 +270,7 @@ require('lazy').setup({
         'markdown_inline',
         'python',
         'query',
+        'regex',
         'ruby',
         'typescript',
         'vim',
@@ -328,6 +334,8 @@ require('lazy').setup({
 
   { import = 'custom.plugins' },
 }, {
+  -- No plugin needs luarocks
+  rocks = { enabled = false },
   ui = {
     icons = vim.g.have_nerd_font and {} or {
       cmd = '⌘',
