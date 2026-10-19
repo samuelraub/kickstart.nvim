@@ -4,13 +4,6 @@ local map = vim.keymap.set
 --  See `:help hlsearch`
 map('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
--- Keybinds to make split and tab navigation easier.
---  See `:help wincmd` for a list of all window commands
-map('n', '<C-left>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-map('n', '<C-right>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-map('n', '<C-down>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-map('n', '<C-up>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
-
 map('n', '<S-left>', '<cmd>bprev<cr>', { desc = 'Move focus to the left' })
 map('n', '<S-right>', '<cmd>bnext<cr>', { desc = 'Move focus to the right' })
 
