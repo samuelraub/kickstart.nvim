@@ -2,26 +2,6 @@
 --  I promise not to create any merge conflicts in this directory :)
 --
 -- See the kickstart.nvim README for more information
-
--- Past the last split, move like tmux's C-arrow bindings do: next pane, or
--- AeroSpace at the outer pane. TmuxNavigate* would wrap inside tmux instead.
-local function navigate(wincmd, tmux_dir, edge, aerospace_dir)
-  local win = vim.api.nvim_get_current_win()
-  vim.cmd('wincmd ' .. wincmd)
-  if vim.api.nvim_get_current_win() ~= win or not vim.env.TMUX then
-    return
-  end
-  local select = 'select-pane -' .. tmux_dir
-  vim.system {
-    'tmux',
-    'if-shell',
-    '-F',
-    '#{pane_at_' .. edge .. '}',
-    'run-shell -b "aerospace focus --boundaries all-monitors-outer-frame ' .. aerospace_dir .. ' 2>/dev/null || tmux ' .. select .. '"',
-    select,
-  }
-end
-
 return {
   {
     'christoomey/vim-tmux-navigator',
@@ -34,10 +14,10 @@ return {
       'TmuxNavigatorProcessList',
     },
     keys = {
-      { '<c-left>', function() navigate('h', 'L', 'left', 'left') end },
-      { '<c-down>', function() navigate('j', 'D', 'bottom', 'down') end },
-      { '<c-up>', function() navigate('k', 'U', 'top', 'up') end },
-      { '<c-right>', function() navigate('l', 'R', 'right', 'right') end },
+      { '<c-left>', '<cmd>TmuxNavigateLeft<cr>' },
+      { '<c-down>', '<cmd>TmuxNavigateDown<cr>' },
+      { '<c-up>', '<cmd>TmuxNavigateUp<cr>' },
+      { '<c-right>', '<cmd>TmuxNavigateRight<cr>' },
     },
   },
   {
